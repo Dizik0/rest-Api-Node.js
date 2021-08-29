@@ -1,8 +1,8 @@
 const {
-  contactSchema: { joiPutContact, Contact },
+  contactSchema: { joiPatchContact, Contact },
 } = require("../../valiadation");
 
-const update = async (req, res, next) => {
+const favorite = async (req, res, next) => {
   const { contactId } = req.params;
 
   const body = req.body;
@@ -10,7 +10,7 @@ const update = async (req, res, next) => {
   const contacts = await Contact.findByIdAndUpdate(contactId, body);
 
   try {
-    const { error } = joiPutContact.validate(body);
+    const { error } = joiPatchContact.validate(body);
 
     if (error) {
       return res.status(400).json({
@@ -18,9 +18,10 @@ const update = async (req, res, next) => {
       });
     } else if (!contacts) {
       return res.status(404).json({
-        message: "Not found",
+        message: "missing field favorite",
       });
     }
+
     res.status(200).json({
       status: "success",
       code: 200,
@@ -33,4 +34,4 @@ const update = async (req, res, next) => {
   }
 };
 
-module.exports = update;
+module.exports = favorite;

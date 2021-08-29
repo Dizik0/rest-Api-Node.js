@@ -1,8 +1,11 @@
-const { listContacts } = require("../../model/contactData");
+const {
+  contactSchema: { Contact },
+} = require("../../valiadation");
 
 const getAll = async (req, res, next) => {
   try {
-    const contacts = await listContacts();
+    const contacts = await Contact.find();
+
     if (!contacts) {
       return res.status(404).json({ message: "Not found" });
     }

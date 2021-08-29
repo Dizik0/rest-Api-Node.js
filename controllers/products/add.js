@@ -1,6 +1,5 @@
-const { addContact } = require("../../model/contactData");
 const {
-  contactSchema: { joiPostContact },
+  contactSchema: { Contact, joiPostContact },
 } = require("../../valiadation");
 
 const add = async (req, res) => {
@@ -11,7 +10,8 @@ const add = async (req, res) => {
         message: error.message,
       });
     }
-    const contacts = await addContact(req.body);
+
+    const contacts = await Contact.create(req.body);
     res.status(201).json({
       status: "success",
       code: 201,
