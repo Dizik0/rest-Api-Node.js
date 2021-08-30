@@ -1,9 +1,7 @@
 const app = require("../app");
+require("dotenv").config();
 
-const { PORT = 4000 } = process.env;
-
-const DB_HOST =
-  "mongodb+srv://Dizik-homework:Cf5caGHfxKfRDpJQ@cluster0.cgpue.mongodb.net/db-contacts?retryWrites=true&w=majority";
+const { DB_HOST, PORT = 4000 } = process.env;
 
 const mongoose = require("mongoose");
 
