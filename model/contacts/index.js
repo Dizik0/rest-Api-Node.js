@@ -3,7 +3,7 @@ const {
   Contact,
   joiPutContact,
   joiPatchContact,
-} = require("./joiValidationContact");
+} = require("./contacts");
 
 module.exports = {
   joiPutContact,

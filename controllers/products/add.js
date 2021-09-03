@@ -1,17 +1,14 @@
 const {
-  contactSchema: { Contact, joiPostContact },
-} = require("../../valiadation");
+  contacts: { Contact },
+} = require("../../model");
 
-const add = async (req, res) => {
+const add = async (req, res, next) => {
   try {
-    const { error } = joiPostContact.validate(req.body);
-    if (error) {
-      return res.status(400).json({
-        message: error.message,
-      });
+    const contacts = await Contact.create(req.body);
+
+    if (!contacts) {
     }
 
-    const contacts = await Contact.create(req.body);
     res.status(201).json({
       status: "success",
       code: 201,
@@ -20,9 +17,7 @@ const add = async (req, res) => {
       },
     });
   } catch (error) {
-    res
-      .status(404)
-      .json({ message: "missing required name field", error: error.message });
+    next(error);
   }
 };
 
