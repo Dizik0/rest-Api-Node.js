@@ -38,6 +38,6 @@ const contactSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
-const Contact = model("contacts", contactSchema);
+const Contact = model("contact", contactSchema);
 
 module.exports = { joiPatchContact, joiPostContact, Contact, joiPutContact };

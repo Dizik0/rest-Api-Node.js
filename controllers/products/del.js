@@ -1,18 +1,16 @@
 const {
-  contactSchema: { Contact },
-} = require("../../valiadation");
+  contacts: { Contact },
+} = require("../../model");
 
 const del = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const resultContacs = await Contact.findById(contactId);
-
   try {
+    const resultContacs = await Contact.findByIdAndRemove(contactId);
+
     if (!resultContacs) {
       return res.status(404).json({ message: "Not found", code: "404" });
     }
-
-    await Contact.findByIdAndRemove(contactId);
 
     res.status(200).json({
       message: "contact deleted",
