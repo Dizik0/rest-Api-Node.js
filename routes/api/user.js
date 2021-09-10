@@ -12,7 +12,11 @@ router.post(
   controllerWrapper(ctrl.register)
 );
 
-// router.post("/login", ctrl.login);
+router.post(
+  "/login",
+  validation(model.joiRegSchema),
+  controllerWrapper(ctrl.login)
+);
 
 // router.get("/logout", ctrl.logout);
 
