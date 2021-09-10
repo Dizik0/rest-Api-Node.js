@@ -1,23 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const { validate } = require("../../valiadation");
+const { validation, controllerWrapper } = require("../../middlewares");
 const { contacts: model } = require("../../model");
 const { products: ctrl } = require("../../controllers");
 
-router.get("/", ctrl.getAll);
+router.get("/", controllerWrapper(ctrl.getAll));
 
-router.get("/:contactId", ctrl.getById);
+router.get("/:contactId", controllerWrapper(ctrl.getById));
 
-router.post("/", validate(model.joiPostContact), ctrl.add);
+router.post("/", validation(model.joiPostContact), controllerWrapper(ctrl.add));
 
-router.delete("/:contactId", ctrl.del);
+router.delete("/:contactId", controllerWrapper(ctrl.del));
 
-router.put("/:contactId", validate(model.joiPutContact), ctrl.update);
+router.put(
+  "/:contactId",
+  // Не нужная функция!
+  validation(model.joiPutContact),
+  controllerWrapper(ctrl.update)
+);
 
 router.patch(
   "/:contactId/favorite",
-  validate(model.joiPatchContact),
-  ctrl.favorite
+  validation(model.joiPatchContact),
+  controllerWrapper(ctrl.favorite)
 );
 
 module.exports = router;
