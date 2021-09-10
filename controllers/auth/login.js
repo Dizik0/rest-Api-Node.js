@@ -1,4 +1,5 @@
 const { BadRequest } = require("http-errors");
+const jwt = require('jsonwebtoken');
 
 const {
   users: { User },
@@ -12,8 +13,13 @@ const login = async (req, res) => {
     throw new BadRequest("Wrong email or password");
   }
 
-  const token =
-    "dfgdfgdfgdfgdfgdfgdg.dfgdfgdfgdfgdfgdfgdfg.dfgdfgdfgdfgdfgdgdfdfg";
+  const payload = {
+    id: user._id
+  }
+
+  const { SECRET_KEY} = process.env;
+
+  const token = jwt.sign(payload, SECRET_KEY)
 
   res.json({
     token,
