@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const { Schema, model } = require("mongoose");
+const { Schema, model, SchemaTypes } = require("mongoose");
 
 const joiPostContact = Joi.object({
   name: Joi.string().required(),
@@ -33,6 +33,10 @@ const contactSchema = Schema(
     favorite: {
       type: Boolean,
       default: false,
+    },
+    owner: {
+      type: SchemaTypes.ObjectId,
+      ref: "users",
     },
   },
   { versionKey: false, timestamps: true }

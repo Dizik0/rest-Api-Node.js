@@ -1,5 +1,5 @@
 const { BadRequest } = require("http-errors");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const {
   users: { User },
@@ -14,12 +14,14 @@ const login = async (req, res) => {
   }
 
   const payload = {
-    id: user._id
-  }
+    id: user._id,
+  };
 
-  const { SECRET_KEY} = process.env;
+  const { SECRET_KEY } = process.env;
 
-  const token = jwt.sign(payload, SECRET_KEY)
+  const token = jwt.sign(payload, SECRET_KEY);
+
+  await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
     token,

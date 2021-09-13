@@ -1,10 +1,11 @@
 const {
   contacts: { Contact },
 } = require("../../model");
+
 const { NotFound } = require("http-errors");
 
-const getAll = async (_, res) => {
-  const contacts = await Contact.find({});
+const getAll = async (req, res) => {
+  const contacts = await Contact.find({ owner: req.user._id });
 
   if (!contacts) {
     throw new NotFound();
