@@ -4,6 +4,7 @@ const del = require("./del");
 const getById = require("./getById");
 const update = require("./update");
 const favorite = require("./favorite");
+const current = require("./current");
 
 module.exports = {
   getAll,
@@ -12,4 +13,5 @@ module.exports = {
   getById,
   update,
   favorite,
+  current,
 };

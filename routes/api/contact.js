@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { validation, controllerWrapper } = require("../../middlewares");
-const { contacts: model } = require("../../model");
+const { contact: model } = require("../../model");
 const { products: ctrl } = require("../../controllers");
 const { tokenVerification } = require("../../middlewares");
 
@@ -32,7 +32,6 @@ router.delete(
 
 router.put(
   "/:contactId",
-  // Не нужная функция!
   controllerWrapper(tokenVerification),
   validation(model.joiPutContact),
   controllerWrapper(ctrl.update)
@@ -43,6 +42,12 @@ router.patch(
   controllerWrapper(tokenVerification),
   validation(model.joiPatchContact),
   controllerWrapper(ctrl.favorite)
+);
+
+router.get(
+  "/users/current",
+  controllerWrapper(tokenVerification),
+  controllerWrapper(ctrl.current)
 );
 
 module.exports = router;

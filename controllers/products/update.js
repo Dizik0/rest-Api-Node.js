@@ -1,5 +1,5 @@
 const {
-  contacts: { Contact },
+  contact: { Contact },
 } = require("../../model");
 const { NotFound } = require("http-errors");
 

@@ -7,7 +7,7 @@ const {
   controllerWrapper,
   tokenVerification,
 } = require("../../middlewares");
-const { users: model } = require("../../model");
+const { user: model } = require("../../model");
 const { auth: ctrl } = require("../../controllers");
 
 router.post(
@@ -26,12 +26,6 @@ router.get(
   "/logout",
   controllerWrapper(tokenVerification),
   controllerWrapper(ctrl.logout)
-);
-
-router.get(
-  "/users/current",
-  controllerWrapper(tokenVerification),
-  controllerWrapper(ctrl.current)
 );
 
 module.exports = router;

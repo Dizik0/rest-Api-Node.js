@@ -2,11 +2,12 @@ const { BadRequest } = require("http-errors");
 const jwt = require("jsonwebtoken");
 
 const {
-  users: { User },
+  user: { User },
 } = require("../../model");
 
 const login = async (req, res) => {
   const { password, email } = req.body;
+
   const user = await User.findOne({ email });
 
   if (!user || !user.verifPassword(password)) {

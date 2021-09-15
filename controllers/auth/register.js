@@ -1,8 +1,7 @@
 const { Conflict } = require("http-errors");
-// const bcrypt = require("bcryptjs");
 
 const {
-  users: { User },
+  user: { User },
 } = require("../../model");
 
 const register = async (req, res) => {

@@ -1,5 +1,5 @@
 const {
-  users: { User },
+  user: { User },
 } = require("../../model");
 
 const logout = async (req, res) => {
