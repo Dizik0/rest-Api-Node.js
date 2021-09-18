@@ -1,25 +1,25 @@
-const { Unauthorized } = require("http-errors");
-const { User } = require("../model/user");
+const { Unauthorized } = require('http-errors')
+const { User } = require('../model/user')
 
 const tokenVerification = async (req, _, next) => {
   try {
-    const [bearer, token] = req.headers.authorization.split(" ");
+    const [bearer, token] = req.headers.authorization.split(' ')
 
-    if (bearer !== "Bearer") {
-      throw new Unauthorized();
+    if (bearer !== 'Bearer') {
+      throw new Unauthorized()
     }
 
-    const user = await User.findOne({ token });
+    const user = await User.findOne({ token })
 
     if (!user) {
-      throw new Unauthorized();
+      throw new Unauthorized()
     }
-    req.user = user;
+    req.user = user
 
-    next();
+    next()
   } catch (error) {
-    throw new Unauthorized(error.message);
+    throw new Unauthorized(error.message)
   }
-};
+}
 
-module.exports = tokenVerification;
+module.exports = tokenVerification
