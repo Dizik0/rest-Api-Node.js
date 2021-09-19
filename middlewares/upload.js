@@ -4,10 +4,10 @@ const path = require('path')
 const tempDir = path.join(__dirname, '../', 'temp')
 
 const multerConfig = multer.diskStorage({
-  destination: (req, file, cd) => {
+  destination: (_, __, cd) => {
     cd(null, tempDir)
   },
-  filename: (req, file, cd) => {
+  filename: (_, file, cd) => {
     cd(null, file.originalname)
   },
   limits: {
@@ -15,8 +15,14 @@ const multerConfig = multer.diskStorage({
   },
 })
 
+const renameOriginalName = (name) => {
+  const [_, format] = name.split('.')
+  const newName = new Date().getTime()
+  return `${newName}.${format}`
+}
+
 const upload = multer({
   storage: multerConfig,
 })
 
-module.exports = upload
+module.exports = { upload, renameOriginalName }

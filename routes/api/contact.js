@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+
 const { validation, controllerWrapper } = require('../../middlewares')
 const { contact: model } = require('../../model')
 const { products: ctrl } = require('../../controllers')
@@ -42,14 +43,6 @@ router.patch(
   controllerWrapper(tokenVerification),
   validation(model.joiPatchContact),
   controllerWrapper(ctrl.favorite)
-)
-
-// TODO ПЕРЕДЕЛАТЬ ЭТО ГОВНО СНИЗУ!!!
-
-router.get(
-  '/users/current',
-  controllerWrapper(tokenVerification),
-  controllerWrapper(ctrl.current)
 )
 
 module.exports = router

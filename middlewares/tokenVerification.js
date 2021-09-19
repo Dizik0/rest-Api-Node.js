@@ -1,5 +1,8 @@
 const { Unauthorized } = require('http-errors')
-const { User } = require('../model/user')
+
+const {
+  user: { User },
+} = require('../model')
 
 const tokenVerification = async (req, _, next) => {
   try {

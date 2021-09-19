@@ -1,10 +1,9 @@
+const { Unauthorized } = require('http-errors')
+const jwt = require('jsonwebtoken')
+
 const {
   user: { User },
 } = require('../../model')
-
-const { Unauthorized } = require('http-errors')
-
-const jwt = require('jsonwebtoken')
 
 const current = async (req, res) => {
   const { SECRET_KEY } = process.env
@@ -16,7 +15,7 @@ const current = async (req, res) => {
   const user = await User.findById(id)
 
   if (!user) {
-    throw new Unauthorized()
+    throw new Unauthorized(11111)
   }
 
   res.status(200).json({ result: user })

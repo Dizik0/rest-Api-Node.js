@@ -1,4 +1,6 @@
 const { Conflict } = require('http-errors')
+const fs = require('fs/promises')
+const path = require('path')
 
 const {
   user: { User },
@@ -6,9 +8,10 @@ const {
 
 const register = async (req, res) => {
   const { password, email } = req.body
-  const respons = await User.findOne({ email })
 
-  if (respons) {
+  const user = await User.findOne({ email })
+
+  if (user) {
     throw new Conflict('Already register')
   }
 
@@ -16,11 +19,16 @@ const register = async (req, res) => {
 
   newUser.setPassword(password)
 
-  await newUser.save()
+  const respons = await newUser.save()
+
+  const userDir = path.join(__dirname, '../../', '/public/avatars')
+
+  await fs.mkdir(path.join(userDir, respons.id))
 
   res.status(201).json({
     status: 'Registration success',
     code: 201,
+    respons,
   })
 }
 module.exports = register

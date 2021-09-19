@@ -1,7 +1,8 @@
+const { NotFound } = require('http-errors')
+
 const {
   contact: { Contact },
-} = require("../../model")
-const { NotFound } = require("http-errors")
+} = require('../../model')
 
 const getById = async (req, res) => {
   const { contactId } = req.params
@@ -13,7 +14,7 @@ const getById = async (req, res) => {
   }
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     code: 200,
     data: {
       result: contacts,

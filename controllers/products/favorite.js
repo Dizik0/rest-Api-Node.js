@@ -1,7 +1,8 @@
+const { NotFound } = require('http-errors')
+
 const {
   contact: { Contact },
 } = require('../../model')
-const { NotFound } = require('http-errors')
 
 const favorite = async (req, res) => {
   const { contactId } = req.params

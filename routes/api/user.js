@@ -1,24 +1,24 @@
 const express = require('express')
-
 const router = express.Router()
 
 const {
-  // validation,
   controllerWrapper,
-  // tokenVerification,
+  tokenVerification,
   upload,
 } = require('../../middlewares')
-
-// const { user: model } = require('../../model')
-// const { auth: ctrl } = require('../../controllers')
-
 const { user: ctrl } = require('../../controllers')
 
 router.patch(
   '/avatars',
   upload.single('image'),
-  // controllerWrapper(tokenVerification),
+  controllerWrapper(tokenVerification),
   controllerWrapper(ctrl.patchAvatars)
+)
+
+router.get(
+  '/current',
+  controllerWrapper(tokenVerification),
+  controllerWrapper(ctrl.current)
 )
 
 module.exports = router
