@@ -1,27 +1,34 @@
-const { Conflict } = require("http-errors");
-// const bcrypt = require("bcryptjs");
+const { Conflict } = require('http-errors')
+const fs = require('fs/promises')
+const path = require('path')
 
 const {
-  users: { User },
-} = require("../../model");
+  user: { User },
+} = require('../../model')
 
 const register = async (req, res) => {
-  const { password, email } = req.body;
-  const respons = await User.findOne({ email });
+  const { password, email } = req.body
 
-  if (respons) {
-    throw new Conflict("Already register");
+  const user = await User.findOne({ email })
+
+  if (user) {
+    throw new Conflict('Already register')
   }
 
-  const newUser = new User({ email });
+  const newUser = new User({ email })
 
-  newUser.setPassword(password);
+  newUser.setPassword(password)
 
-  await newUser.save();
+  const respons = await newUser.save()
+
+  const userDir = path.join(__dirname, '../../', '/public/avatars')
+
+  await fs.mkdir(path.join(userDir, respons.id))
 
   res.status(201).json({
-    status: "Registration success",
+    status: 'Registration success',
     code: 201,
-  });
-};
-module.exports = register;
+    respons,
+  })
+}
+module.exports = register
