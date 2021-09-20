@@ -8,7 +8,7 @@ const multerConfig = multer.diskStorage({
     cd(null, tempDir)
   },
   filename: (_, file, cd) => {
-    cd(null, file.originalname)
+    cd(null, renameOriginalName(file.originalname))
   },
   limits: {
     fileSize: 1024,
