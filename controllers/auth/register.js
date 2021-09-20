@@ -1,6 +1,8 @@
 const { Conflict } = require('http-errors')
 const fs = require('fs/promises')
 const path = require('path')
+const gravatar = require('gravatar')
+const Jimp = require('jimp')
 
 const {
   user: { User },
@@ -14,8 +16,9 @@ const register = async (req, res) => {
   if (user) {
     throw new Conflict('Already register')
   }
+  const avatarURL = gravatar.url(email, { protocol: 'https' })
 
-  const newUser = new User({ email })
+  const newUser = new User({ email, avatarURL })
 
   newUser.setPassword(password)
 
