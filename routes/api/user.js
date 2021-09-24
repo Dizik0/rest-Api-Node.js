@@ -8,6 +8,8 @@ const {
 } = require('../../middlewares')
 const { user: ctrl } = require('../../controllers')
 
+// const verify = require('../../utils')
+
 router.patch(
   '/avatars',
   upload.single('image'),
@@ -19,6 +21,11 @@ router.get(
   '/current',
   controllerWrapper(tokenVerification),
   controllerWrapper(ctrl.current)
+)
+router.get(
+  '/verify/:verificationToken'
+  // controllerWrapper(tokenVerification),
+  // controllerWrapper(verify)
 )
 
 module.exports = router
