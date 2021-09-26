@@ -15,7 +15,7 @@ const current = async (req, res) => {
   const user = await User.findById(id)
 
   if (!user) {
-    throw new Unauthorized(11111)
+    throw new Unauthorized()
   }
 
   res.status(200).json({ result: user })
