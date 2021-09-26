@@ -10,6 +10,7 @@ const verify = async (req, res) => {
   const user = await User.findOne({
     verifyToken: verificationToken,
   })
+
   if (!user) {
     throw new NotFound('User not found')
   }

@@ -11,6 +11,8 @@ const {
 const { user: model } = require('../../model')
 const { auth: ctrl } = require('../../controllers')
 
+console.log(ctrl.verify)
+
 router.post(
   '/register',
   validation(model.joiRegSchema),
@@ -28,5 +30,9 @@ router.get(
   controllerWrapper(tokenVerification),
   controllerWrapper(ctrl.logout)
 )
+
+router.get('/verify/:verificationToken', controllerWrapper(ctrl.verify))
+
+router.post('/verify', controllerWrapper(ctrl.resendEmail))
 
 module.exports = router

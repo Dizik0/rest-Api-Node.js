@@ -21,8 +21,4 @@ router.get(
   controllerWrapper(ctrl.current)
 )
 
-router.get('/verify/:verificationToken', controllerWrapper(ctrl.verify))
-
-router.get('/verify', controllerWrapper(ctrl.resendEmail))
-
 module.exports = router
