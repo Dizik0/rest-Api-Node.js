@@ -29,11 +29,7 @@ const register = async (req, res) => {
   sendMessageVerify({
     from: 'dizik-@ukr.net',
     subject: 'verification email',
-
-    html: `<a href='http://localhost:4000/api/users/verify/:${newUser.verifyToken}'>please confirm account verification</a>
-
-
-    `,
+    html: `<a href='http://localhost:4000/api/users/verify/${newUser.verifyToken}'>please confirm account verification</a>`,
   })
 
   const respons = await newUser.save()

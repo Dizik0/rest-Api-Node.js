@@ -7,8 +7,6 @@ const sendMessageVerify = async (data) => {
 
   const mail = { to: 'denisggwp77@gmail.com', ...data }
 
-  console.log(mail)
-
   await sgMail.send(mail)
 }
 
