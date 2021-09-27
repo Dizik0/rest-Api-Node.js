@@ -11,7 +11,7 @@ const { user: ctrl } = require('../../controllers')
 router.patch(
   '/',
   controllerWrapper(tokenVerification),
-  controllerWrapper(ctrl.subscription)
+  controllerWrapper(ctrl.patchSubscription)
 )
 
 router.patch(

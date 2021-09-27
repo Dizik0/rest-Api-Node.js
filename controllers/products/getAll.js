@@ -19,10 +19,6 @@ const getAll = async (req, res) => {
       }
     )
 
-    if (!favoriteContacts) {
-      throw new NotFound()
-    }
-
     res.status(200).json({
       status: 'success',
       code: 200,

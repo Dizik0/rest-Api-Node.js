@@ -1,5 +1,3 @@
-const { NotFound } = require('http-errors')
-
 const {
   contact: { Contact },
 } = require('../../model')
@@ -10,10 +8,6 @@ const favorite = async (req, res) => {
   const contacts = await Contact.findByIdAndUpdate(contactId, req.body, {
     new: true,
   })
-
-  if (!contacts) {
-    throw new NotFound()
-  }
 
   res.status(200).json({
     status: 'success',

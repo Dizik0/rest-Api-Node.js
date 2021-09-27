@@ -11,8 +11,6 @@ const {
 const { user: model } = require('../../model')
 const { auth: ctrl } = require('../../controllers')
 
-console.log(ctrl.verify)
-
 router.post(
   '/register',
   validation(model.joiRegSchema),

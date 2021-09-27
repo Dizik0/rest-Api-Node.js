@@ -44,6 +44,8 @@ const userSchema = Schema(
 
   { versionKey: false, timestamps: true }
 )
+// userSchema.path('subscription').options
+// userSchema.path('subscription').options.enum
 
 userSchema.methods.setPassword = function (password) {
   this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
