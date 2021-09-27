@@ -9,6 +9,12 @@ const {
 const { user: ctrl } = require('../../controllers')
 
 router.patch(
+  '/',
+  controllerWrapper(tokenVerification),
+  controllerWrapper(ctrl.subscription)
+)
+
+router.patch(
   '/avatars',
   upload.single('image'),
   controllerWrapper(tokenVerification),
